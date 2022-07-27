@@ -7,21 +7,36 @@
     <title>Form</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
+  <style>
+    .container {
+      display: flex;
+      margin: 0 auto;
+      width: 600px;
+      flex-direction: column;
+      background-color: aqua;
+    }
+    .Registration {
+      text-align: center;
+    }
+    h3 {
+      margin: 0;
+    }
+  </style>
   <body>
     <form>
       <div class="container">
-        <h1>Регистрация</h1>
-        <label for="Login">Логин</label>
+        <h1 class="Registration">Регистрация</h1>
+        <label for="Login"><h3>Логин</h3></label>
         <input type="text" name="Login" placeholder="Login" />
-        <label for="Password">Пароль</label>
+        <label for="Password"><h3>Пароль</h3></label>
         <input type="password" name="Password" placeholder="Enter password" />
-        <label for="Repeat_password">Повторите пароль</label>
+        <label for="Repeat_password"><h3>Повторите пароль</h3></label>
         <input
           type="text"
           name="Repeat_password"
           placeholder="Repeat password"
         />
-        <label for="Email">Электронная почта</label>
+        <label for="Email"><h3>Электронная почта</h3></label>
         <input type="email" name="Email" placeholder="Email" />
         <button type="submit">Зарегистрироваться</button>
       </div>
