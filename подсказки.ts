@@ -50,6 +50,7 @@ response.writeHead(404,{
    "content-text" : "text/html"
 })
 
+ОТладка чтобы научиться дебажить нашу программу нужно прописать флаг --inspect
 
 
 

@@ -1,9 +1,9 @@
-let http = require("http");
+import http from "http";
 let fs = require("fs");
 
-const readFile = (path) => {
+const readFile = (path: string) => {
   return new Promise((resolve, reject) => {
-    fs.readFile(path, (err, data) => {
+    fs.readFile(path, (err: any, data: unknown) => {
       if (err) {
         reject(err);
       } else {
