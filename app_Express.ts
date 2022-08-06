@@ -1,14 +1,29 @@
 import express from 'express'; /** Подключаем экспресс*/
+const morgan = require('morgan');
 const fs = require('fs');
 const app = express(); /**вызываем метод экспресс */
+// 1) MIDDLEWARE
+app.use(morgan('dev'));
 app.use(express.json());
+app.use((req, res, next) => {
+  console.log('hello from middleware');
+  next();
+});
+
+app.use((req: any, res, next) => {
+  req.requestTime = new Date().toDateString();
+  next();
+});
+// 2)ROUTES HANDLERS
 const toursjson = JSON.parse(
   fs.readFileSync(`${__dirname}/text/tourssimple.json`)
 );
 const getAllTours = (req: any, res: any) => {
+  console.log(req.requestTime);
   //**получаем данные */
   res.status(200).json({
     status: 'success',
+    requestedaAt: req.requestTime,
     results: toursjson.length,
     data: {
       tours: toursjson,
@@ -81,6 +96,7 @@ const deleteTour = (req: any, res: any) => {
     data: 'null',
   });
 };
+// 3 ROUTES
 // app.get('/api/v1/tours', getAllTours);
 // app.get('/api/v1/tours/:id', getTour);
 // app.post('/api/v1/tours', createTour);
@@ -92,6 +108,8 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+// 4) START SERVER
 const port = 3000; /**создаем порт на котором будет работать сервер  */
 app.listen(port, () => {
   /**говорим слушать этот сервер  */
