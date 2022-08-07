@@ -2,7 +2,7 @@
   "name": "nodejscourse",
   "version": "1.0.0",
   "description": "",
-  "main": "1-intro.js",
+  "main": "",
   "scripts": {
     "start": "",
     "dev": "nodemon  dist/express.js "
