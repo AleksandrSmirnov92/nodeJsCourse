@@ -1,7 +1,7 @@
 import express from 'express'; /** Подключаем экспресс*/
-const path = require('path');
+
 const morgan = require('morgan');
-const fs = require('fs');
+
 const toursRoute = require('./routes/tourRouts');
 const usersRoute = require('./routes/userRouts');
 const app = express(); /**вызываем метод экспресс */
@@ -30,8 +30,4 @@ app.use('/api/v1/tours', toursRoute);
 app.use('/api/v1/users', usersRoute);
 
 // 4) START SERVER
-const port = 3000; /**создаем порт на котором будет работать сервер  */
-app.listen(port, () => {
-  /**говорим слушать этот сервер  */
-  console.log(`this port listening on port ${port}`);
-});
+module.exports = app;
