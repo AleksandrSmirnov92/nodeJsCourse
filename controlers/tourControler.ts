@@ -5,6 +5,30 @@ const toursjson = JSON.parse(
     `${path.join(__dirname, '../../dev-data', '/tourssimple.json')}`
   )
 );
+
+exports.checkID = (req: any, res: any, next: any, val: any) => {
+  console.log('this is tour id = ' + val);
+  let paramNum = Number(req.params.id) * 1;
+  if (toursjson.length < paramNum) {
+    return res.status(404).json({
+      status: 'fail',
+      message: 'not found params in DB',
+    });
+  }
+  next();
+};
+exports.checkBody = (req: any, res: any, next: any) => {
+  console.log(req.body);
+  if (!req.body.duration || !req.body.price) {
+    return res.status(400).json({
+      status: 'fail',
+      message: 'not params in body',
+    });
+  }
+  console.log('success');
+  next();
+};
+// Функциии
 exports.getAllTours = (req: any, res: any) => {
   console.log(req.requestTime);
   //**получаем данные */
@@ -21,12 +45,6 @@ exports.getTour = (req: any, res: any) => {
   //**получаем данные */
   console.log(req.params);
   let paramNumber = Number(req.params.id);
-  if (paramNumber > toursjson.length) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'invalid ID',
-    });
-  }
   let tour = toursjson.find((el: any) => Number(el.id) === paramNumber);
   res.status(200).json({
     status: 'success',
@@ -57,13 +75,6 @@ exports.createTour = (req: any, res: any) => {
   // res.send('done');
 };
 exports.updateTour = (req: any, res: any) => {
-  let paramNum = Number(req.params.id) * 1;
-  if (toursjson.length < paramNum) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'not found params in DB',
-    });
-  }
   console.log(req.params, req.body);
   res.status(200).json({
     status: 'success',
@@ -71,13 +82,6 @@ exports.updateTour = (req: any, res: any) => {
   });
 };
 exports.deleteTour = (req: any, res: any) => {
-  let paramNum = Number(req.params.id) * 1;
-  if (toursjson.length < paramNum) {
-    return res.status(404).json({
-      status: 'fail',
-      message: 'not found params in DB',
-    });
-  }
   res.status(204).json({
     status: 'success',
     data: 'null',

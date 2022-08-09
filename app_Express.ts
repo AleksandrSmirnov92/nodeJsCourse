@@ -6,8 +6,11 @@ const toursRoute = require('./routes/tourRouts');
 const usersRoute = require('./routes/userRouts');
 const app = express(); /**вызываем метод экспресс */
 // 1) MIDDLEWARE
+// if (process.env.NODE_ENV === 'development') {
 app.use(morgan('dev'));
+// }
 app.use(express.json());
+app.use(express.static(`${__dirname}/../public`));
 app.use((req, res, next) => {
   console.log('hello from middleware');
   next();
