@@ -1,5 +1,5 @@
-import http from "http";
-let fs = require("fs");
+import http from 'http';
+let fs = require('fs');
 
 const readFile = (path: string) => {
   return new Promise((resolve, reject) => {
@@ -14,14 +14,14 @@ const readFile = (path: string) => {
 };
 let server = http.createServer(async (request, response) => {
   switch (request.url) {
-    case "/home": {
-      const data = await readFile("pages/index.html");
+    case '/home': {
+      const data = await readFile('pages/index.html');
       response.write(data);
       response.end();
       break;
     }
     default: {
-      response.write("404 not found");
+      response.write('404 not found');
       response.end();
     }
   }
